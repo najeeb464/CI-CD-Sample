@@ -6,7 +6,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: test
+      - uses: actions/checkout@v2
+      - name: SET UP Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: [3.8]
+      - name: Run Python command
         run: |
-          echo "system ok "
-          echo "pwd" pwd
+          pip install --upgrade pip
+          python3.8 -m venv env
+          source env/bin/activate
+          pip install -r requirements.txt
+          echo "virtual env:" $env
